@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-poppins: "Poppins", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #050608;
+  color: #f5f7fa;
+  font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
+}
+
+.gradient-blue {
+  background: linear-gradient(135deg, #0b5cff, #19b5ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-blue-bg {
+  background: linear-gradient(135deg, #0b5cff, #19b5ff);
+}
+
+.hero-bg {
+  background-color: #050608;
+  background-image: radial-gradient(
+      ellipse at 75% 50%,
+      rgba(11, 92, 255, 0.1) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse at 95% 80%,
+      rgba(25, 181, 255, 0.06) 0%,
+      transparent 40%
+    );
+}
+
+.card-glow:hover {
+  box-shadow: 0 0 32px rgba(11, 92, 255, 0.18);
+}
