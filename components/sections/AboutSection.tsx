@@ -3,28 +3,14 @@ import AboutServiceList from "./AboutServiceList";
 
 export default function AboutSection() {
   return (
-    <section id="ueber-uns" className="relative overflow-hidden bg-[#050608]">
-      {/* Desktop: edge-to-edge image pinned to the right half */}
-      <div className="hidden lg:block absolute inset-y-0 right-0 w-1/2">
-        <Image
-          src="/images/key-programming-car-service.jpeg"
-          alt="Kfz-Service Diagnose"
-          fill
-          className="object-cover"
-          sizes="50vw"
-          priority
-        />
-        {/* Left blend into section background */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#050608] via-[#050608]/20 to-transparent" />
-        {/* Top fade */}
-        <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-[#050608] to-transparent" />
-        {/* Bottom fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#050608] to-transparent" />
-      </div>
+    <section id="ueber-uns" className="bg-[#050608] overflow-hidden">
+      {/* Two-column grid: left = content, right = image.
+          Both columns are exactly 50% of the viewport — no absolute positioning
+          that could drift when a max-width container auto-margins. */}
+      <div className="lg:grid lg:grid-cols-2">
 
-      {/* Content — constrained to left half on desktop */}
-      <div className="relative z-10 max-w-[1440px] mx-auto px-6 py-24 lg:py-32">
-        <div className="lg:max-w-[52%] lg:pr-12 xl:pr-20">
+        {/* ── Left: content ── */}
+        <div className="py-20 lg:py-28 xl:py-32 px-6 sm:px-10 lg:px-12 xl:px-16 2xl:px-20">
           <h2 className="text-5xl md:text-6xl lg:text-7xl font-black gradient-blue mb-6 tracking-tight leading-tight">
             Kfz-Service
           </h2>
@@ -39,17 +25,24 @@ export default function AboutSection() {
           <AboutServiceList />
         </div>
 
-        {/* Mobile image — stacks below the text */}
-        <div className="lg:hidden mt-12 relative h-[300px] sm:h-[380px] rounded-3xl overflow-hidden">
+        {/* ── Right: image — fills the grid cell edge-to-edge ── */}
+        <div className="relative h-[360px] lg:h-auto">
           <Image
             src="/images/key-programming-car-service.jpeg"
             alt="Kfz-Service Diagnose"
             fill
             className="object-cover"
-            sizes="100vw"
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#050608]/70 via-transparent to-transparent" />
+          {/* Blend left edge into section background */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#050608] via-[#050608]/15 to-transparent" />
+          {/* Top fade */}
+          <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-[#050608] to-transparent" />
+          {/* Bottom fade */}
+          <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#050608] to-transparent" />
         </div>
+
       </div>
     </section>
   );
