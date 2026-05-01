@@ -1,33 +1,34 @@
+import Image from "next/image";
 import { Phone } from "lucide-react";
 
 export default function AboutImageCard() {
   return (
     <div className="relative">
-      <div className="relative rounded-3xl overflow-hidden h-[480px] lg:h-[580px] bg-[#0E1118]">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0A0F1E] via-[#0E1118] to-[#050608]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_40%,rgba(11,92,255,0.12)_0%,transparent_60%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_70%,rgba(25,181,255,0.06)_0%,transparent_50%)]" />
+      <div className="relative rounded-3xl overflow-hidden h-[480px] lg:h-[580px]">
+        {/* Real image */}
+        <Image
+          src="/images/key-programming-car-service.jpeg"
+          alt="Key programming car service"
+          fill
+          className="object-cover z-0"
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          priority
+        />
 
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center select-none">
-            <div className="text-[120px] font-black text-white/[0.03] leading-none tracking-tighter">
-              KFZ
-            </div>
-            <div className="text-[60px] font-black text-white/[0.02] leading-none tracking-tighter -mt-4">
-              SERVICE
-            </div>
-          </div>
-        </div>
+        {/* Dark overlay to match site style */}
+        <div className="absolute inset-0 z-[1] bg-gradient-to-br from-[#050608]/70 via-[#050608]/40 to-transparent" />
 
-        <div className="absolute inset-0 grid grid-cols-8 grid-rows-8 opacity-[0.03]">
-          {Array.from({ length: 64 }).map((_, i) => (
-            <div key={i} className="border border-[#0B5CFF]" />
-          ))}
-        </div>
+        {/* Blue accent glow */}
+        <div className="absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_30%_40%,rgba(11,92,255,0.12)_0%,transparent_60%)]" />
 
-        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#050608]/80 to-transparent" />
+        {/* Bottom fade into page background */}
+        <div className="absolute bottom-0 left-0 right-0 h-40 z-[2] bg-gradient-to-t from-[#07090D] to-transparent" />
+
+        {/* Subtle blue border glow */}
+        <div className="absolute inset-0 z-[3] rounded-3xl ring-1 ring-[#0B5CFF]/20 pointer-events-none" />
       </div>
 
+      {/* Phone / contact card */}
       <div className="absolute bottom-6 left-6 z-20 px-5 py-4 rounded-2xl bg-[#0E1118]/95 backdrop-blur-sm border border-white/[0.1] shadow-2xl">
         <div className="flex items-center gap-4">
           <div className="w-11 h-11 rounded-xl bg-[#0B5CFF]/10 border border-[#0B5CFF]/20 flex items-center justify-center">
