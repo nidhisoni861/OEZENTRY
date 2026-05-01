@@ -87,7 +87,7 @@ export default function ThankYouInquiry() {
             <p className="text-sm text-[#A0A7B3] leading-relaxed">
               Bei dringenden Anliegen kannst du uns auch direkt per{" "}
               <a
-                href="https://wa.me/4916325395577"
+                href="https://wa.me/491632539557"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[#19B5FF] hover:underline"

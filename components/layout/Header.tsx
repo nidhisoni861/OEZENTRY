@@ -25,27 +25,30 @@ export default function Header() {
           </div>
         </a>
 
-        <nav className="hidden md:flex items-center gap-10">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-xs font-semibold tracking-[0.18em] uppercase text-[#A0A7B3] hover:text-[#F5F7FA] transition-colors duration-200"
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
+        {/* Nav + WhatsApp grouped on the right */}
+        <div className="hidden md:flex items-center gap-8">
+          <nav className="flex items-center gap-10">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-xs font-semibold tracking-[0.18em] uppercase text-[#A0A7B3] hover:text-[#F5F7FA] transition-colors duration-200"
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
 
-        <a
-          href="https://wa.me/491711234567"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-full gradient-blue-bg text-white text-xs font-bold tracking-wide hover:opacity-90 transition-opacity"
-        >
-          <MessageCircle size={15} />
-          WhatsApp
-        </a>
+          <a
+            href="https://wa.me/491632539557"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-full gradient-blue-bg text-white text-xs font-bold tracking-wide hover:opacity-90 transition-opacity"
+          >
+            <MessageCircle size={15} />
+            WhatsApp
+          </a>
+        </div>
 
         <button
           className="md:hidden text-[#F5F7FA] p-1"
@@ -69,7 +72,7 @@ export default function Header() {
             </a>
           ))}
           <a
-            href="https://wa.me/491711234567"
+            href="https://wa.me/491632539557"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-5 py-2.5 rounded-full gradient-blue-bg text-white text-xs font-bold w-fit"

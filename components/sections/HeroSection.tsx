@@ -1,15 +1,9 @@
 "use client";
 
 import { motion, type Variants } from "motion/react";
-import { Calendar, MessageCircle, Star } from "lucide-react";
+import { Calendar, MessageCircle } from "lucide-react";
 import Button from "@/components/ui/Button";
 import SectionLabel from "@/components/ui/SectionLabel";
-
-const stats = [
-  { value: "6+", label: "Leistungen" },
-  { value: "100%", label: "Professionell" },
-  { icon: Star, value: "5", label: "Bewertung" },
-];
 
 // Individual text element: fade up from below
 const fadeUp: Variants = {
@@ -124,7 +118,7 @@ export default function HeroSection() {
             </Button>
             <Button
               variant="outline"
-              href="https://wa.me/491711234567"
+              href="https://wa.me/491632539557"
               className="uppercase tracking-widest text-xs px-7 py-3.5"
             >
               <MessageCircle size={15} />
@@ -132,33 +126,6 @@ export default function HeroSection() {
             </Button>
           </motion.div>
 
-          {/* 5 — Stats row */}
-          <motion.div
-            className="flex flex-wrap gap-8 border-t border-white/[0.08] pt-8"
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            custom={0.96}
-          >
-            {stats.map((stat, i) => (
-              <div key={i} className="flex flex-col gap-1">
-                <div className="flex items-center gap-1.5">
-                  {stat.icon && (
-                    <stat.icon
-                      size={18}
-                      className="text-[#0B5CFF] fill-[#0B5CFF]"
-                    />
-                  )}
-                  <span className="text-2xl md:text-3xl font-black text-[#0B5CFF]">
-                    {stat.value}
-                  </span>
-                </div>
-                <span className="text-[10px] tracking-[0.18em] uppercase text-[#A0A7B3]">
-                  {stat.label}
-                </span>
-              </div>
-            ))}
-          </motion.div>
         </div>
       </motion.div>
 

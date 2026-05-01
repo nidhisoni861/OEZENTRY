@@ -66,7 +66,7 @@ export default function Footer() {
 
             <div className="flex gap-3">
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/oezentry?igsh=MWh6ZzV0YTMzZnZrMA=="
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
@@ -75,7 +75,7 @@ export default function Footer() {
                 <InstagramIcon size={16} />
               </a>
               <a
-                href="https://tiktok.com"
+                href="https://www.tiktok.com/@oezentry?_r=1&_t=ZG-960MU7HDNUv"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="TikTok"
