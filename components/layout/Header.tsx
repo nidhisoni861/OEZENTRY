@@ -14,7 +14,7 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/[0.06] backdrop-blur-md bg-[#050608]/85">
-      <div className="max-w-[1440px] mx-auto px-6 h-[82px] flex items-center justify-between">
+      <div className="w-full px-6 sm:px-10 lg:px-12 xl:px-16 2xl:px-20 h-[82px] flex items-center justify-between">
         <a href="#" className="flex items-center gap-3 shrink-0">
           <div className="w-10 h-10 rounded-xl bg-[#0E1118] border border-white/[0.1] flex items-center justify-center">
             <span className="text-xs font-black text-[#0B5CFF] tracking-tight">OE</span>

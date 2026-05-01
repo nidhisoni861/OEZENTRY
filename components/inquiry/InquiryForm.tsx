@@ -50,18 +50,18 @@ function InputField({
 }) {
   return (
     <div>
-      <label className="text-xs text-[#A0A7B3] block mb-1.5">{label}</label>
+      <label className="text-sm text-[#A0A7B3] block mb-2">{label}</label>
       <input
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className={`w-full bg-[#050608] border rounded-xl px-4 py-3 text-sm text-[#F5F7FA] focus:outline-none transition-colors ${
+        className={`w-full bg-[#050608] border rounded-xl px-4 py-3.5 text-sm text-[#F5F7FA] focus:outline-none transition-colors ${
           error
             ? "border-red-500/60 focus:border-red-500"
             : "border-[#0B5CFF]/40 focus:border-[#0B5CFF]"
         }`}
       />
-      {error && <p className="text-red-400 text-[11px] mt-1">{error}</p>}
+      {error && <p className="text-red-400 text-xs mt-1.5">{error}</p>}
     </div>
   );
 }
@@ -81,7 +81,7 @@ function ToggleButton({
     <button
       type="button"
       onClick={onClick}
-      className={`px-4 py-2.5 rounded-xl text-xs font-semibold border transition-all duration-150 ${
+      className={`px-4 py-3 rounded-xl text-xs font-semibold border transition-all duration-150 text-left ${
         fullWidth ? "w-full" : ""
       } ${
         active
@@ -141,52 +141,53 @@ export default function InquiryForm() {
 
   return (
     <div className="min-h-screen bg-[#050608]">
-      {/* Background glow */}
+      {/* Ambient glow */}
       <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(11,92,255,0.09)_0%,transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(11,92,255,0.09)_0%,transparent_65%)]" />
       </div>
 
-      <div className="relative z-10 pt-[82px] pb-20 px-4 sm:px-6">
-        <div className="max-w-2xl mx-auto mt-10">
-          <div className="rounded-3xl border border-white/[0.1] bg-[#0A0D14] p-7 sm:p-10 shadow-2xl">
+      {/* Page content */}
+      <div className="relative z-10 pt-[82px] pb-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto mt-10 w-full">
+          <div className="rounded-3xl border border-white/[0.1] bg-[#0A0D14] p-8 sm:p-10 lg:p-14 shadow-2xl">
 
-            {/* ── Form heading ── */}
-            <h1 className="text-lg sm:text-xl font-black tracking-[0.08em] uppercase text-[#F5F7FA] mb-3">
+            {/* ── Heading ── */}
+            <h1 className="text-xl sm:text-2xl font-black tracking-[0.08em] uppercase text-[#F5F7FA] mb-4">
               Deine Serviceanfrage an uns
             </h1>
-            <p className="text-sm text-[#A0A7B3] leading-relaxed mb-8">
+            <p className="text-sm text-[#A0A7B3] leading-relaxed mb-10 max-w-2xl">
               Du brauchst Hilfe bei Autoschlüssel-Programmierung,
               Steuergeräte-Instandsetzung, Mercedes Xentry, Codierung, Diagnose
               oder Softwareoptimierung? Beschreibe uns kurz dein Anliegen.{" "}
               Wir melden uns schnellstmöglich bei dir zurück.
             </p>
 
-            {/* ── Message ── */}
-            <div className="mb-8">
-              <label className="text-xs text-[#A0A7B3] block mb-1.5">
+            {/* ── Message textarea ── */}
+            <div className="mb-10">
+              <label className="text-sm text-[#A0A7B3] block mb-2">
                 Deine Nachricht...
               </label>
               <textarea
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
-                rows={4}
-                className="w-full bg-[#050608] border border-[#0B5CFF]/40 rounded-xl px-4 py-3 text-sm text-[#F5F7FA] resize-y focus:outline-none focus:border-[#0B5CFF] transition-colors"
+                rows={5}
+                className="w-full bg-[#050608] border border-[#0B5CFF]/40 rounded-xl px-4 py-3.5 text-sm text-[#F5F7FA] resize-y focus:outline-none focus:border-[#0B5CFF] transition-colors"
               />
             </div>
 
-            <hr className="border-white/[0.08] mb-8" />
+            <hr className="border-white/[0.08] mb-10" />
 
             {/* ── Personal data ── */}
-            <h2 className="text-[11px] font-black tracking-[0.18em] uppercase text-[#F5F7FA] mb-1">
+            <h2 className="text-xs font-black tracking-[0.2em] uppercase text-[#F5F7FA] mb-2">
               Persönliche Daten
             </h2>
-            <p className="text-xs text-[#A0A7B3] mb-6">
+            <p className="text-sm text-[#A0A7B3] mb-7">
               Für die Kontaktaufnahme benötigen wir deine Daten. Mit{" "}
               <span className="text-[#F5F7FA]">*</span> gekennzeichnete Eingaben
               sind Pflicht.
             </p>
 
-            <div className="grid sm:grid-cols-2 gap-4 mb-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-1">
               <InputField
                 label="Vorname*"
                 value={form.firstName}
@@ -225,19 +226,19 @@ export default function InquiryForm() {
               />
             </div>
 
-            <hr className="border-white/[0.08] my-8" />
+            <hr className="border-white/[0.08] my-10" />
 
             {/* ── Available times ── */}
-            <h2 className="text-[11px] font-black tracking-[0.18em] uppercase text-[#F5F7FA] mb-1">
+            <h2 className="text-xs font-black tracking-[0.2em] uppercase text-[#F5F7FA] mb-2">
               Verfügbare Zeiten
             </h2>
-            <p className="text-xs text-[#A0A7B3] mb-5">
+            <p className="text-sm text-[#A0A7B3] mb-6">
               Bitte teile uns mit, an welchen Tagen und zu welchen Zeiten wir
               dich am besten erreichen können.
             </p>
 
             {/* Days */}
-            <div className="flex flex-wrap gap-2 mb-3">
+            <div className="flex flex-wrap gap-2.5 mb-3">
               {DAYS.map((day) => (
                 <ToggleButton
                   key={day}
@@ -250,7 +251,7 @@ export default function InquiryForm() {
             </div>
 
             {/* Times */}
-            <div className="flex flex-wrap gap-2 mb-3">
+            <div className="flex flex-wrap gap-2.5 mb-3">
               {TIMES.map((time) => (
                 <ToggleButton
                   key={time}
@@ -273,22 +274,23 @@ export default function InquiryForm() {
               Nach Vereinbarung
             </ToggleButton>
 
-            <hr className="border-white/[0.08] my-8" />
+            <hr className="border-white/[0.08] my-10" />
 
             {/* ── Contact permissions ── */}
-            <h2 className="text-[11px] font-black tracking-[0.18em] uppercase text-[#F5F7FA] mb-1">
+            <h2 className="text-xs font-black tracking-[0.2em] uppercase text-[#F5F7FA] mb-2">
               Informationen zur Kontaktaufnahme
             </h2>
-            <p className="text-xs text-[#A0A7B3] mb-5">
+            <p className="text-sm text-[#A0A7B3] mb-6">
               Wähle aus, wie du kontaktiert werden möchtest.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-3 mb-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
               <ToggleButton
                 active={form.contactEmail}
                 onClick={() =>
                   setForm({ ...form, contactEmail: !form.contactEmail })
                 }
+                fullWidth
               >
                 Ich willige in die Kontaktaufnahme per E-Mail ein
               </ToggleButton>
@@ -297,16 +299,17 @@ export default function InquiryForm() {
                 onClick={() =>
                   setForm({ ...form, contactPhone: !form.contactPhone })
                 }
+                fullWidth
               >
                 Ich willige in die Kontaktaufnahme per Telefon / WhatsApp ein
               </ToggleButton>
             </div>
 
             {errors.consent && (
-              <p className="text-red-400 text-xs mb-4">{errors.consent}</p>
+              <p className="text-red-400 text-sm mb-4">{errors.consent}</p>
             )}
 
-            <p className="text-xs text-[#A0A7B3] mb-8">
+            <p className="text-sm text-[#A0A7B3] mb-10">
               Bitte beachte auch unsere{" "}
               <a href="#" className="text-[#19B5FF] hover:underline">
                 Hinweise zum Datenschutz
@@ -315,16 +318,16 @@ export default function InquiryForm() {
             </p>
 
             {/* ── Actions ── */}
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col-reverse sm:flex-row items-center justify-between gap-4">
               <button
                 onClick={() => router.push("/")}
-                className="text-xs font-bold tracking-[0.15em] uppercase text-[#0B5CFF] hover:text-[#19B5FF] transition-colors"
+                className="w-full sm:w-auto text-sm font-bold tracking-[0.15em] uppercase text-[#0B5CFF] hover:text-[#19B5FF] transition-colors text-center py-3"
               >
                 Abbruch
               </button>
               <button
                 onClick={handleSubmit}
-                className="px-8 py-3.5 rounded-full gradient-blue-bg text-white text-xs font-black tracking-[0.15em] uppercase hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] transition-all"
+                className="w-full sm:w-auto px-10 py-4 rounded-full gradient-blue-bg text-white text-sm font-black tracking-[0.15em] uppercase hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] transition-all text-center"
               >
                 Absenden
               </button>
