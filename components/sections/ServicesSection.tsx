@@ -19,8 +19,7 @@ export default function ServicesSection() {
           <div className="w-14 h-[2px] gradient-blue-bg mx-auto mb-6" />
 
           <p className="text-sm md:text-base text-[#A0A7B3] max-w-md mx-auto">
-            Professionelle Kfz-Dienstleistungen für maximale Performance und
-            Zuverlässigkeit.
+            Performance und Zuverlässigkeit.
           </p>
         </div>
 
