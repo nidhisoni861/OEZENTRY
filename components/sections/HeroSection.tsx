@@ -91,7 +91,7 @@ export default function HeroSection() {
             animate="visible"
             custom={0.8}
           >
-            <Button href="#kontakt" className="uppercase tracking-widest text-xs px-7 py-3.5">
+            <Button href="/anfrage" className="uppercase tracking-widest text-xs px-7 py-3.5">
               <Calendar size={15} />
               Termin vereinbaren
             </Button>
