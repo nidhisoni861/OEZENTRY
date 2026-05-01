@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Zap, Key, Monitor, Search, Wrench, Music2 } from "lucide-react";
+import { Key, Cpu, Monitor, Search, Rocket, Lock, Zap, Wrench, Music2 } from "lucide-react";
 
 export interface Service {
   id: string;
@@ -11,52 +11,52 @@ export interface Service {
 
 export const services: Service[] = [
   {
-    id: "chip-tuning",
-    icon: Zap,
-    category: "Performance",
-    title: "Chip Tuning",
-    description:
-      "Leistungssteigerung durch professionelle Motorsteuerung-Optimierung. Mehr PS, mehr Drehmoment — abgestimmt auf Ihr Fahrzeug.",
-  },
-  {
-    id: "schluessel",
+    id: "ersatzschluessel",
     icon: Key,
-    category: "Sicherheit",
-    title: "Schlüsselprogrammierung",
+    category: "Schlüssel",
+    title: "Auto Ersatzschlüssel",
     description:
-      "Verloren oder defekt? Wir programmieren neue Fahrzeugschlüssel und Fernbedienungen für alle gängigen Marken.",
+      "All Key Lost, Neuanfertigung, Nachmachen, Reparatur und Programmierung von Autoschlüsseln. Auch Keyless-Go und Funkfernbedienung.",
   },
   {
-    id: "xentry",
+    id: "steuergeraete",
+    icon: Cpu,
+    category: "Steuergeräte",
+    title: "Steuergeräte",
+    description:
+      "Instandsetzung, Programmierung und Codierung von Motor-, Getriebe- und ABS-Steuergeräten. Wegfahrsperren deaktivieren sowie AdBlue-, DPF- & AGR-Deaktivierung.",
+  },
+  {
+    id: "mercedes-xentry",
     icon: Monitor,
     category: "Mercedes",
-    title: "Xentry Codierung",
+    title: "Mercedes Xentry",
     description:
-      "Fahrzeugspezifische Codierung & Freischaltung von Sonderfunktionen mit professioneller Mercedes-Diagnosesoftware.",
+      "Steuergeräte codieren, Funktionen freischalten, Komponenten anlernen, Fehlerspeicher auslesen & löschen, Diagnose und Systemprüfung.",
   },
   {
-    id: "diagnose",
+    id: "fehlerspeicher",
     icon: Search,
     category: "Diagnose",
-    title: "Fehler Diagnose",
+    title: "Fehlerspeicher Auslesen/Löschen",
     description:
-      "Vollständige OBD-Fahrzeugdiagnose zur Auslesung und Analyse von Fehlercodes. Schnell, präzise, transparent.",
+      "Fehlerspeicher auslesen und löschen – inklusive Bericht und Fehlercode.",
   },
   {
-    id: "dpf-agr",
-    icon: Wrench,
-    category: "Motoroptimierung",
-    title: "DPF / AGR Off",
+    id: "softwareoptimierung",
+    icon: Rocket,
+    category: "Software",
+    title: "Softwareoptimierung",
     description:
-      "Professionelle Deaktivierung von Dieselpartikelfilter und AGR-Ventil für verbesserte Motorleistung und Haltbarkeit.",
+      "Chiptuning, Pop & Bangs, VMAX-Aufhebung, AGR-, DPF- und AdBlue-Deaktivierung sowie Getriebe-Optimierung.",
   },
   {
-    id: "pop-bang",
-    icon: Music2,
-    category: "Sound",
-    title: "Pop & Bang",
+    id: "mercedes-zuendschloss",
+    icon: Lock,
+    category: "Mercedes",
+    title: "Mercedes Zündschloss",
     description:
-      "Sportlicher Auspuffsound auf Knopfdruck. Wir programmieren den begehrten Pfeif- und Knalleffekt in Ihre Motorsteuerung.",
+      "Reparatur defekter Mercedes EZS, Klonen von Zündschlössern und Reset / Virgin Modus.",
   },
 ];
 
