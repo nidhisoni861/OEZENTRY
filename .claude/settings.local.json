@@ -3,7 +3,9 @@
     "allow": [
       "Bash(Get-ChildItem -Path \"c:\\\\malek\\\\oezentry\" -Recurse -Force)",
       "Bash(Select-Object -ExpandProperty FullName)",
-      "Bash(npx next *)"
+      "Bash(npx next *)",
+      "Bash(Get-ChildItem -Path \"c:\\\\malek\\\\oezentry\\\\public\" -Recurse -File)",
+      "Bash(Select-Object FullName)"
     ]
   }
 }
