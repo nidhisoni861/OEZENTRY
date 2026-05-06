@@ -62,9 +62,9 @@ export default function DatenschutzPage() {
                       <div className="text-sm text-[#A0A7B3] leading-relaxed space-y-0.5">
                         <p className="font-semibold text-[#F5F7FA]">OEZENTRY</p>
                         <p>Inhaber: Özdemir Can Kökten</p>
-                        <p>Schorndorferstr. 7</p>
+                        <p>Schorndorfer Str. 7</p>
                         <p>73650 Winterbach</p>
-                        <p>E-Mail: Oezentry@outlook.de</p>
+                        <p>E-Mail: oezentry@outlook.de</p>
                       </div>
                     </div>
                     <div>

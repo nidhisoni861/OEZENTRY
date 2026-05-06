@@ -63,7 +63,7 @@ export default function Footer() {
               </div>
               <div>
                 <p className="font-black text-[#F5F7FA] text-sm tracking-[0.12em]">OEZENTRY</p>
-                <p className="text-[12px] text-[#A0A7B3] tracking-[0.2em]">FAHRZEUG ELEKTRONIK</p>
+                <p className="text-[12px] text-[#A0A7B3] tracking-[0.2em]">FAHRZEUGELEKTRONIK</p>
               </div>
             </div>
 
@@ -125,9 +125,9 @@ export default function Footer() {
             </h3>
             <div className="flex flex-col gap-3">
               {[
-                { icon: MapPin, text: "Schorndorferstr 7, 73650 Winterbach" },
-                { icon: Phone, text: "+49 163 2539557" },
-                { icon: Mail, text: "Oezentry@outlook.de" },
+                { icon: MapPin, text: "Schorndorfer Str 7, 73650 Winterbach" },
+                { icon: Phone, text: "+49 163 253 95 57" },
+                { icon: Mail, text: "oezentry@outlook.de" },
               ].map(({ icon: Icon, text }) => (
                 <div key={text} className="flex items-start gap-2.5 text-sm text-[#A0A7B3]">
                   <Icon size={14} className="text-[#0B5CFF] shrink-0 mt-0.5" />
@@ -156,7 +156,7 @@ export default function Footer() {
             </Link>
           </div>
           <p className="text-xs text-[#A0A7B3]">
-            © 2024 OEZENTRY. Alle Rechte vorbehalten.
+            © 2026 OEZENTRY. Alle Rechte vorbehalten.
           </p>
         </div>
       </div>

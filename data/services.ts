@@ -61,7 +61,7 @@ export const services: Service[] = [
 ];
 
 export const aboutServices = [
-  { icon: Zap, label: "Chip Tuning & Leistungsoptimierung" },
+  { icon: Zap, label: "Chiptuning & Leistungsoptimierung" },
   { icon: Key, label: "Schlüsselprogrammierung aller Marken" },
   { icon: Monitor, label: "Xentry Codierung & Diagnose" },
   { icon: Wrench, label: "DPF / AGR Off & Motoroptimierung" },

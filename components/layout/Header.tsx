@@ -33,7 +33,7 @@ export default function Header() {
           </div>
           <div>
             <p className="font-black text-[#F5F7FA] text-sm tracking-[0.12em]">OEZENTRY</p>
-            <p className="text-[12px] text-[#A0A7B3] tracking-[0.2em]">FAHRZEUG ELEKTRONIK</p>
+            <p className="text-[12px] text-[#A0A7B3] tracking-[0.2em]">FAHRZEUGELEKTRONIK</p>
           </div>
         </Link>
 

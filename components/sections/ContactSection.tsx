@@ -12,7 +12,7 @@ const contacts = [
   {
     icon: MessageCircle,
     title: "WhatsApp",
-    value: "+49 163 2539557",
+    value: "+49 163 253 95 57",
     subtitle: "Schnelle Antwort garantiert",
   },
   {

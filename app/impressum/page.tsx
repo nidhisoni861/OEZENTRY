@@ -34,7 +34,7 @@ export default function ImpressumPage() {
                   <h2 className="text-base font-bold text-[#19B5FF] mb-4">OEZENTRY</h2>
                   <div className="text-sm text-[#A0A7B3] leading-relaxed space-y-0.5">
                     <p>Inhaber: Özdemir Can Kökten</p>
-                    <p>Schorndorferstr. 7</p>
+                    <p>Schorndorfer Str. 7</p>
                     <p>73650 Winterbach</p>
                     <p>Deutschland</p>
                   </div>
@@ -46,8 +46,8 @@ export default function ImpressumPage() {
                 <section>
                   <h2 className="text-base font-bold text-[#19B5FF] mb-4">Kontakt</h2>
                   <div className="text-sm text-[#A0A7B3] leading-relaxed space-y-0.5">
-                    <p>Telefon / WhatsApp: +49 163 2539557</p>
-                    <p>E-Mail: Oezentry@outlook.de</p>
+                    <p>Telefon / WhatsApp: +49 163 253 9557</p>
+                    <p>E-Mail: oezentry@outlook.de</p>
                   </div>
                 </section>
 

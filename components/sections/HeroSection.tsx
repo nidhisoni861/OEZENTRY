@@ -63,7 +63,7 @@ export default function HeroSection() {
             custom={0.2}
           >
             <SectionLabel>
-              Professioneller KFZ-Service · Pocking, Bayern
+              SPEZIALIST FÜR FAHRZEUGELEKTRONIK · WINTERBACH
             </SectionLabel>
           </motion.div>
 
