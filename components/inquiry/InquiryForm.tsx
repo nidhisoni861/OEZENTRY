@@ -1,15 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useId } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { Calendar, ChevronDown, Check } from "lucide-react";
 
-const DAYS = ["Mo", "Di", "Mi", "Do", "Fr"];
-const TIMES = [
-  "08:00–10:00",
-  "10:00–12:00",
-  "12:00–14:00",
-  "14:00–16:00",
-  "16:00–18:00",
+const TIME_OPTIONS = [
+  { value: "vormittags", label: "Vormittags (08:00 - 12:00 Uhr)" },
+  { value: "mittags", label: "Mittags (12:00 - 14:00 Uhr)" },
+  { value: "nachmittags", label: "Nachmittags (14:00 - 18:00 Uhr)" },
+  { value: "vereinbarung", label: "Nach Vereinbarung" },
 ];
 
 interface FormState {
@@ -20,11 +20,11 @@ interface FormState {
   phone: string;
   carModel: string;
   buildYear: string;
-  days: string[];
-  times: string[];
-  byAppointment: boolean;
+  wishDate: string;
+  preferredTime: string;
   contactEmail: boolean;
   contactPhone: boolean;
+  datenschutzAccepted: boolean;
 }
 
 interface FormErrors {
@@ -33,6 +33,7 @@ interface FormErrors {
   email?: string;
   phone?: string;
   consent?: string;
+  datenschutz?: string;
 }
 
 function InputField({
@@ -40,22 +41,27 @@ function InputField({
   value,
   onChange,
   type = "text",
+  placeholder,
   error,
 }: {
   label: string;
   value: string;
   onChange: (v: string) => void;
   type?: string;
+  placeholder?: string;
   error?: string;
 }) {
   return (
     <div>
-      <label className="text-sm text-[#A0A7B3] block mb-2">{label}</label>
+      <label className="text-[10px] font-bold tracking-[0.15em] uppercase text-[#A0A7B3] block mb-2">
+        {label}
+      </label>
       <input
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className={`w-full bg-[#050608] border rounded-xl px-4 py-3.5 text-sm text-[#F5F7FA] focus:outline-none transition-colors ${
+        placeholder={placeholder}
+        className={`w-full bg-[#050608] border rounded-xl px-4 py-3.5 text-sm text-[#F5F7FA] placeholder:text-[#4A5060] focus:outline-none transition-colors ${
           error
             ? "border-red-500/60 focus:border-red-500"
             : "border-[#0B5CFF]/40 focus:border-[#0B5CFF]"
@@ -66,31 +72,41 @@ function InputField({
   );
 }
 
-function ToggleButton({
+function CheckboxField({
+  checked,
+  onChange,
   children,
-  active,
-  onClick,
-  fullWidth = false,
+  error,
 }: {
+  checked: boolean;
+  onChange: (v: boolean) => void;
   children: React.ReactNode;
-  active: boolean;
-  onClick: () => void;
-  fullWidth?: boolean;
+  error?: string;
 }) {
+  const id = useId();
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`px-4 py-3 rounded-xl text-xs font-semibold border transition-all duration-150 text-left ${
-        fullWidth ? "w-full" : ""
-      } ${
-        active
-          ? "bg-[#0B5CFF]/20 border-[#0B5CFF] text-[#19B5FF]"
-          : "bg-transparent border-white/[0.15] text-[#A0A7B3] hover:border-[#0B5CFF]/50 hover:text-[#F5F7FA]"
-      }`}
-    >
-      {children}
-    </button>
+    <div className="flex flex-col gap-1.5">
+      <label htmlFor={id} className="flex items-start gap-3 cursor-pointer group">
+        <div
+          className={`w-5 h-5 mt-0.5 rounded border-2 flex items-center justify-center shrink-0 transition-colors ${
+            checked
+              ? "bg-[#0B5CFF] border-[#0B5CFF]"
+              : "bg-[#050608] border-[#0B5CFF]/40 group-hover:border-[#0B5CFF]/70"
+          }`}
+        >
+          {checked && <Check size={11} className="text-white" strokeWidth={3} />}
+        </div>
+        <span className="text-sm text-[#A0A7B3] leading-relaxed">{children}</span>
+      </label>
+      <input
+        type="checkbox"
+        id={id}
+        checked={checked}
+        onChange={(e) => onChange(e.target.checked)}
+        className="sr-only"
+      />
+      {error && <p className="text-red-400 text-xs ml-8">{error}</p>}
+    </div>
   );
 }
 
@@ -104,22 +120,13 @@ export default function InquiryForm() {
     phone: "",
     carModel: "",
     buildYear: "",
-    days: [],
-    times: [],
-    byAppointment: false,
+    wishDate: "",
+    preferredTime: "",
     contactEmail: false,
     contactPhone: false,
+    datenschutzAccepted: false,
   });
   const [errors, setErrors] = useState<FormErrors>({});
-
-  const toggleList = (key: "days" | "times", value: string) => {
-    setForm((prev) => ({
-      ...prev,
-      [key]: prev[key].includes(value)
-        ? prev[key].filter((v) => v !== value)
-        : [...prev[key], value],
-    }));
-  };
 
   const validate = (): boolean => {
     const e: FormErrors = {};
@@ -129,6 +136,8 @@ export default function InquiryForm() {
     if (!form.phone.trim()) e.phone = "Pflichtfeld";
     if (!form.contactEmail && !form.contactPhone)
       e.consent = "Bitte wähle mindestens eine Kontaktmethode aus.";
+    if (!form.datenschutzAccepted)
+      e.datenschutz = "Bitte akzeptiere die Datenschutzerklärung um fortzufahren.";
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -149,29 +158,28 @@ export default function InquiryForm() {
       {/* Page content */}
       <div className="relative z-10 pt-[82px] pb-24 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto mt-10 w-full">
-          <div className="rounded-3xl border border-white/[0.1] bg-[#0A0D14] p-8 sm:p-10 lg:p-14 shadow-2xl">
+          <div className="rounded-3xl border border-white/[0.1] bg-[#0A0D14] p-6 sm:p-10 lg:p-14 shadow-2xl">
 
             {/* ── Heading ── */}
             <h1 className="text-xl sm:text-2xl font-black tracking-[0.08em] uppercase text-[#F5F7FA] mb-4">
               Deine Serviceanfrage an uns
             </h1>
-            <p className="text-sm text-[#A0A7B3] leading-relaxed mb-10 max-w-2xl">
-              Du brauchst Hilfe bei Autoschlüssel-Programmierung,
-              Steuergeräte-Instandsetzung, Mercedes Xentry, Codierung, Diagnose
-              oder Softwareoptimierung? Beschreibe uns kurz dein Anliegen.{" "}
-              Wir melden uns schnellstmöglich bei dir zurück.
+            <p className="text-sm text-[#A0A7B3] leading-relaxed mb-8 max-w-2xl">
+              Du benötigst Unterstützung bei der Schlüsselprogrammierung,
+              Steuergeräte-Instandsetzung, Codierung oder Diagnose via Mercedes Xentry?
             </p>
 
             {/* ── Message textarea ── */}
             <div className="mb-10">
               <label className="text-sm text-[#A0A7B3] block mb-2">
-                Deine Nachricht...
+                Beschreibe kurz dein Anliegen
               </label>
               <textarea
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
                 rows={5}
-                className="w-full bg-[#050608] border border-[#0B5CFF]/40 rounded-xl px-4 py-3.5 text-sm text-[#F5F7FA] resize-y focus:outline-none focus:border-[#0B5CFF] transition-colors"
+                placeholder="z.B. EZS defekt, Schlüssel verloren, VIN: WDC..."
+                className="w-full bg-[#050608] border border-[#0B5CFF]/40 rounded-xl px-4 py-3.5 text-sm text-[#F5F7FA] placeholder:text-[#4A5060] resize-y focus:outline-none focus:border-[#0B5CFF] transition-colors"
               />
             </div>
 
@@ -217,6 +225,7 @@ export default function InquiryForm() {
               <InputField
                 label="Fahrzeugmarke / Modell"
                 value={form.carModel}
+                placeholder="z.B. Mercedes W212 E-Klasse"
                 onChange={(v) => setForm({ ...form, carModel: v })}
               />
               <InputField
@@ -237,85 +246,108 @@ export default function InquiryForm() {
               dich am besten erreichen können.
             </p>
 
-            {/* Days */}
-            <div className="flex flex-wrap gap-2.5 mb-3">
-              {DAYS.map((day) => (
-                <ToggleButton
-                  key={day}
-                  active={form.days.includes(day)}
-                  onClick={() => toggleList("days", day)}
-                >
-                  {day}
-                </ToggleButton>
-              ))}
-            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              {/* Date picker */}
+              <div>
+                <label className="text-[10px] font-bold tracking-[0.15em] uppercase text-[#A0A7B3] block mb-2">
+                  Wunchtag wählen
+                </label>
+                <div className="relative">
+                  <Calendar
+                    size={16}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 text-[#A0A7B3] pointer-events-none z-10"
+                  />
+                  <input
+                    type="date"
+                    value={form.wishDate}
+                    onChange={(e) => setForm({ ...form, wishDate: e.target.value })}
+                    className="w-full bg-[#050608] border border-[#0B5CFF]/40 rounded-xl pl-11 pr-4 py-3.5 text-sm text-[#F5F7FA] focus:outline-none focus:border-[#0B5CFF] transition-colors appearance-none"
+                    style={{ colorScheme: "dark" }}
+                  />
+                </div>
+                <p className="text-xs text-[#4A5060] mt-2">
+                  (Mehrfachauswahl oder individuelle Termine im Textfeld möglich)
+                </p>
+              </div>
 
-            {/* Times */}
-            <div className="flex flex-wrap gap-2.5 mb-3">
-              {TIMES.map((time) => (
-                <ToggleButton
-                  key={time}
-                  active={form.times.includes(time)}
-                  onClick={() => toggleList("times", time)}
-                >
-                  {time}
-                </ToggleButton>
-              ))}
+              {/* Time select */}
+              <div>
+                <label className="text-[10px] font-bold tracking-[0.15em] uppercase text-[#A0A7B3] block mb-2">
+                  Bevorzugte Uhrzeit
+                </label>
+                <div className="relative">
+                  <select
+                    value={form.preferredTime}
+                    onChange={(e) => setForm({ ...form, preferredTime: e.target.value })}
+                    className="w-full bg-[#050608] border border-[#0B5CFF]/40 rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:border-[#0B5CFF] transition-colors appearance-none pr-10 cursor-pointer"
+                    style={{
+                      color: form.preferredTime ? "#F5F7FA" : "#4A5060",
+                    }}
+                  >
+                    <option value="" style={{ color: "#4A5060", backgroundColor: "#050608" }}>
+                      Bitte auswählen
+                    </option>
+                    {TIME_OPTIONS.map((opt) => (
+                      <option
+                        key={opt.value}
+                        value={opt.value}
+                        style={{ color: "#F5F7FA", backgroundColor: "#050608" }}
+                      >
+                        {opt.label}
+                      </option>
+                    ))}
+                  </select>
+                  <ChevronDown
+                    size={16}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-[#A0A7B3] pointer-events-none"
+                  />
+                </div>
+              </div>
             </div>
-
-            {/* Nach Vereinbarung — full width */}
-            <ToggleButton
-              active={form.byAppointment}
-              onClick={() =>
-                setForm({ ...form, byAppointment: !form.byAppointment })
-              }
-              fullWidth
-            >
-              Nach Vereinbarung
-            </ToggleButton>
 
             <hr className="border-white/[0.08] my-10" />
 
             {/* ── Contact permissions ── */}
-            <h2 className="text-xs font-black tracking-[0.2em] uppercase text-[#F5F7FA] mb-2">
+            <h2 className="text-xs font-black tracking-[0.2em] uppercase text-[#F5F7FA] mb-6">
               Informationen zur Kontaktaufnahme
             </h2>
-            <p className="text-sm text-[#A0A7B3] mb-6">
-              Wähle aus, wie du kontaktiert werden möchtest.
-            </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
-              <ToggleButton
-                active={form.contactEmail}
-                onClick={() =>
-                  setForm({ ...form, contactEmail: !form.contactEmail })
-                }
-                fullWidth
+            <div className="flex flex-col gap-4 mb-4">
+              <CheckboxField
+                checked={form.contactEmail}
+                onChange={(v) => setForm({ ...form, contactEmail: v })}
               >
-                Ich willige in die Kontaktaufnahme per E-Mail ein
-              </ToggleButton>
-              <ToggleButton
-                active={form.contactPhone}
-                onClick={() =>
-                  setForm({ ...form, contactPhone: !form.contactPhone })
-                }
-                fullWidth
+                Ich willige in die Kontaktaufnahme per E-Mail ein.
+              </CheckboxField>
+              <CheckboxField
+                checked={form.contactPhone}
+                onChange={(v) => setForm({ ...form, contactPhone: v })}
               >
-                Ich willige in die Kontaktaufnahme per Telefon / WhatsApp ein
-              </ToggleButton>
+                Ich willige in die Kontaktaufnahme per Telefon / WhatsApp ein.
+              </CheckboxField>
             </div>
 
             {errors.consent && (
               <p className="text-red-400 text-sm mb-4">{errors.consent}</p>
             )}
 
-            <p className="text-sm text-[#A0A7B3] mb-10">
-              Bitte beachte auch unsere{" "}
-              <a href="#" className="text-[#19B5FF] hover:underline">
-                Hinweise zum Datenschutz
-              </a>
-              .
-            </p>
+            <div className="border-t border-white/[0.06] pt-6 mb-8">
+              <CheckboxField
+                checked={form.datenschutzAccepted}
+                onChange={(v) => setForm({ ...form, datenschutzAccepted: v })}
+                error={errors.datenschutz}
+              >
+                Ich habe die{" "}
+                <Link
+                  href="/datenschutz"
+                  className="text-[#19B5FF] hover:underline"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  Datenschutzerklärung
+                </Link>{" "}
+                gelesen und akzeptiere diese.*
+              </CheckboxField>
+            </div>
 
             {/* ── Actions ── */}
             <div className="flex flex-col-reverse sm:flex-row items-center justify-between gap-4">
