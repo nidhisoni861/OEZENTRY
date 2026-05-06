@@ -1,9 +1,14 @@
+"use client";
+
 import { MapPin, Phone, Mail } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
-  { label: "Leistungen", href: "#leistungen" },
-  { label: "Über uns", href: "#ueber-uns" },
-  { label: "Kontakt", href: "#kontakt" },
+  { label: "Leistungen", href: "/#leistungen" },
+  { label: "Über uns", href: "/#ueber-uns" },
+  { label: "Kontakt", href: "/#kontakt" },
+
 ];
 
 function InstagramIcon({ size = 16 }: { size?: number }) {
@@ -41,6 +46,8 @@ function TikTokIcon({ size = 16 }: { size?: number }) {
 }
 
 export default function Footer() {
+  const pathname = usePathname();
+
   return (
     <footer className="bg-[#050608] relative">
       <div className="absolute top-0 left-0 right-0 h-px gradient-blue-bg opacity-40" />
@@ -92,15 +99,22 @@ export default function Footer() {
               Navigation
             </h3>
             <div className="flex flex-col gap-3">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm text-[#A0A7B3] hover:text-[#19B5FF] transition-colors"
-                >
-                  {link.label}
-                </a>
-              ))}
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`text-sm transition-colors ${
+                      isActive
+                        ? "text-[#19B5FF]"
+                        : "text-[#A0A7B3] hover:text-[#19B5FF]"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
             </div>
           </div>
 
@@ -126,11 +140,23 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="border-t border-white/[0.06] pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <Link
+              href="/datenschutz"
+              className="text-xs text-[#A0A7B3] hover:text-[#19B5FF] transition-colors"
+            >
+              Datenschutzerklärung
+            </Link>
+            <span className="text-xs text-[#A0A7B3]">|</span>
+            <Link
+              href="/impressum"
+              className="text-xs text-[#A0A7B3] hover:text-[#19B5FF] transition-colors"
+            >
+              Impressum
+            </Link>
+          </div>
           <p className="text-xs text-[#A0A7B3]">
-            Datenschutzerklärung | Impressum
-          </p>
-          <p className="text-xs text-[#A0A7B3]">
-            © 2025 OEZENTRY. Alle Rechte vorbehalten.
+            © 2024 OEZENTRY. Alle Rechte vorbehalten.
           </p>
         </div>
       </div>
