@@ -17,7 +17,7 @@ export default function Header() {
       <div className="max-w-[1440px] mx-auto px-6 h-[82px] flex items-center justify-between">
         <a href="#" className="flex items-center gap-3 shrink-0">
           <div className="w-10 h-10 rounded-xl bg-[#0E1118] border border-white/[0.1] flex items-center justify-center">
-            <span className="text-xs font-black text-[#0B5CFF] tracking-tight">OE</span>
+            <span className="text-xs font-black text-[#0B5CFF] tracking-tight">Nidhi</span>
           </div>
           <div>
             <p className="font-black text-[#F5F7FA] text-sm tracking-[0.12em]">OEZENTRY</p>
