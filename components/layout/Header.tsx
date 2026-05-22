@@ -104,7 +104,7 @@ export default function Header() {
             className="flex items-center gap-2 px-5 py-2.5 rounded-full gradient-blue-bg text-white text-xs font-bold w-fit"
           >
             <MessageCircle size={15} />
-            WhatsApp
+            Instagram
           </a>
         </div>
       )}
