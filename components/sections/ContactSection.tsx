@@ -1,13 +1,13 @@
-import { Phone, MessageCircle, MapPin } from "lucide-react";
+import { Clock, MessageCircle, MapPin, Phone } from "lucide-react";
 import ContactCard from "@/components/ui/ContactCard";
 import Button from "@/components/ui/Button";
 
 const contacts = [
   {
-    icon: Phone,
-    title: "Telefon",
-    value: "+49 163 2539557",
-    subtitle: "Mo – Fr: 08:00 – 18:00 Uhr",
+    icon: Clock,
+    title: "Öffnungszeiten",
+    value: "Termin nach Vereinbarung",
+    subtitle: "Schnelle Erreichbarkeit per Telefon & WhatsApp",
   },
   {
     icon: MessageCircle,
@@ -18,7 +18,7 @@ const contacts = [
   {
     icon: MapPin,
     title: "Standort",
-    value: "Pocking, Bayern",
+    value: "Schorndorferstr 7, 73650 Winterbach",
     subtitle: "Direkt vor Ort für dich da",
   },
 ];
